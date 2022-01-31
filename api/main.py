@@ -2,6 +2,7 @@ from distutils.log import debug
 from os import (environ)
 from requests import (get)
 from flask import (Flask, request)
+from flask_cors import (CORS)
 from dotenv import (load_dotenv)
 
 RELATIVE_PATH_DOTENV_LOCAL = "./.env.local"
@@ -11,6 +12,7 @@ UNSPLASH_URL = "https://api.unsplash.com/photos/random"
 UNSPLASH_KEY = environ.get("UNSPLASH_KEY", "")
 DEBUG= bool(environ.get("DEBUG", True))
 app = Flask(__name__)
+CORS(app)
 app.config["DEBUG"] = DEBUG
 
 if not UNSPLASH_KEY:
