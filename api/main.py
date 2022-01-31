@@ -1,15 +1,17 @@
+from distutils.log import debug
 from os import (environ)
 from requests import (get)
 from flask import (Flask, request)
 from dotenv import (load_dotenv)
 
+RELATIVE_PATH_DOTENV_LOCAL = "./.env.local"
+load_dotenv(dotenv_path=RELATIVE_PATH_DOTENV_LOCAL)
+
 UNSPLASH_URL = "https://api.unsplash.com/photos/random"
 UNSPLASH_KEY = environ.get("UNSPLASH_KEY", "")
-relative_path_env_local = "./.env.local"
+DEBUG= bool(environ.get("DEBUG", True))
 app = Flask(__name__)
-
-load_dotenv(dotenv_path=relative_path_env_local)
-
+app.config["DEBUG"] = DEBUG
 
 if not UNSPLASH_KEY:
   raise EnvironmentError("Please create .env.local file and insert there UNSPLASH_KEY")
