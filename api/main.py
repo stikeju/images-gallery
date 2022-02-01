@@ -1,4 +1,3 @@
-from distutils.log import debug
 from os import environ
 from requests import get
 from flask import Flask, request
